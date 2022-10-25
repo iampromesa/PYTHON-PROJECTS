@@ -1,6 +1,4 @@
-prices = int(input("Input five numbers seperated with commas: "))
-total = 0
+numbers = [5,2,5,2,2]
 
-for price in prices:
-    total += price
-print("Total: {}".format(total))
+for x_count in numbers:
+    print('X' * x_count)

@@ -12,6 +12,3 @@ class circle():
 
     def setRadius(self, radius):
         self.radius = radius 
-
-
-         

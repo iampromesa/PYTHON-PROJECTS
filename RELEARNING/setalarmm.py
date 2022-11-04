@@ -14,4 +14,3 @@ def setAlarm(employed, vacation):
         print(False)
         
 setAlarm(employed=True,vacation=False)
-

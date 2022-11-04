@@ -1,21 +1,20 @@
 import socket
 
-HOST = '127.0.0.1' # '192.168.0.108'
-PORT  = 8081 #2222
-
-server = socket.socket
+HOST = '127.0.0.1' # '192.168.43.82'
+PORT = 8081 # 2222
+server = socket.socket()
 server.bind((HOST, PORT))
-print("[+] Server Started")
-print("[+] Listening For Client Connection ...")
+print('[+] Server Started')
+print('[+] Listening For Client Connection ...')
 server.listen(1)
 client, client_addr = server.accept()
-print("[+] {} Client connected to the server".format(client_addr))
+print(f'[+] {client_addr} Client connected to the server')
 
 while True:
-    command = input("Enter Command : ")
+    command = input('Enter Command : ')
     command = command.encode()
     client.send(command)
-    print("[-] Command Sent")
+    print('[+] Command sent')
     output = client.recv(1024)
     output = output.decode()
-    print("Output {}".format(output))
+    print(f"Output: {output}")

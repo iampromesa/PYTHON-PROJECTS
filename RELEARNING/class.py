@@ -11,4 +11,4 @@ class circle():
         print(self.radius * self.radius * math.pi)
 
     def setRadius(self, radius):
-        self.radius = radius 
+        self.radius = radius

@@ -1,33 +1,45 @@
-import requests
-import json
-
 # importing from tkinter
 from tkinter import *
 
-# importing tkk from tkinter 
+# importing tkk from tkinter
 from tkinter import ttk
+
+import requests
+# import json
 
 API_KEY = "816bff4d73dcc1d96466bdf0"
 
-#the standard request url 
-url = f'https://v6.exchangerate-api.com/v6/{API_KEY}/latest/USD'
+# the standard request url
+url = f"https://v6.exchangerate-api.com/v6/816bff4d73dcc1d96466bdf0/latest/USD"
 
 # making the Standard request to the API and converting the request to json
 response = requests.get(f"{url}").json()
 
-#converting the currencies into dictionaries
+# converting the currencies into dictionaries
 currencies = dict(response["conversion_rates"])
 
-# creating the main window 
+# function for converting two pairs of currencies
+def convert_currency():
+    source = from_currency_combo.get()
+    destination = to_currency_combo.get()
+    amount = amount_entry.get()
+    result = requests.get(f'https://v6.exchangerate-api.com/v6/816bff4d73dcc1d96466bdf0/pair/{source}/{destination}/{amount}').json()
+    converted_result = result["Conversion Result"]
+    formatted_result = f'{amount} {source} = {converted_result} {destination}'
+    result_label.config(text = formatted_result)
+    time_label.config(text= "last_updated," + result["time_last_updated_UTC"])
+    convert_button = Button(bottom_frame, text="CONVERT", bg=secondary, fg=white, font=('Poppins 10 bold'), command=convert_currency())
+
+# creating the main window
 window = Tk()
 
-# this gives the window width(310) ,height(340) and the position center 
+# this gives the window width(310) ,height(340) and the position center
 window.geometry("310x340+500+200")
 
-# window title 
+# window title
 window.title("Promesa's Currency Converter")
 
-# this will make the window non resizeable since height and width = FALSE
+# this will make the window non-resizeable since height and width = FALSE
 window.resizable(height=TRUE, width=TRUE)
 
 # colours for the application
@@ -58,7 +70,7 @@ from_currency_combo = ttk.Combobox(bottom_frame, values=list(currencies.keys()),
 from_currency_combo.place(x=5, y=30)
 
 # this is the combobox for holding to_currencies
-to_currency_combo = ttk.Combobox(bottom_frame, width=14, font=("Poppins 10 bold"))
+to_currency_combo = ttk.Combobox(bottom_frame, values=list(currencies.keys()), width=14, font=("Poppins 10 bold"))
 to_currency_combo.place(x=160, y=30)
 
 # the label for AMOUNT

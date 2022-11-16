@@ -4,9 +4,10 @@ from tkinter import *
 # importing tkk from tkinter
 from tkinter import ttk
 
+# import request
 import requests
-# import json
 
+# API_KEY
 API_KEY = "816bff4d73dcc1d96466bdf0"
 
 # the standard request url
@@ -26,9 +27,8 @@ def convert_currency():
     result = requests.get(f'https://v6.exchangerate-api.com/v6/816bff4d73dcc1d96466bdf0/pair/{source}/{destination}/{amount}').json()
     converted_result = result["Conversion Result"]
     formatted_result = f'{amount} {source} = {converted_result} {destination}'
-    result_label.config(text = formatted_result)
+    result_label.config(text= formatted_result)
     time_label.config(text= "last_updated," + result["time_last_updated_UTC"])
-    convert_button = Button(bottom_frame, text="CONVERT", bg=secondary, fg=white, font=('Poppins 10 bold'), command=convert_currency())
 
 # creating the main window
 window = Tk()
@@ -90,7 +90,7 @@ time_label = Label(bottom_frame, text=" ", font=('Poppins 10 bold'))
 time_label.place(x=5, y=135)
 
 # the clickable button for converting the currency
-convert_button = Button(bottom_frame, text="CONVERT", bg=secondary, fg=white, font=('Poppins 10 bold'))
+convert_button = Button(bottom_frame, text="CONVERT", bg=secondary, fg=white, font=('Poppins 10 bold'), command=convert_currency())
 convert_button.place(x=5, y=165)
 
 # this run the windows until it is closed 
